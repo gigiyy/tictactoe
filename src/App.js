@@ -36,7 +36,7 @@ function Board({ xIsNext, squares, onPlay }) {
     let board_row = [];
     for (let col = 0; col < 3; col++) {
       let index = row * 3 + col;
-      board_row.push(<Square value={squares[index]} onSquareClick={() => handleClick(index)}/>);
+      board_row.push(<Square value={squares[index]} onSquareClick={() => handleClick(index)} />);
     }
     board.push(<div className="board-row">{board_row}</div>)
   }
@@ -54,6 +54,11 @@ export default function Game() {
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
+  const [orderAsd, setOrderAsd] = useState(true);
+
+  function handleSort() {
+    setOrderAsd(!orderAsd);
+  }
 
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -93,7 +98,8 @@ export default function Game() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{moves}</ol>
+        <button onClick={() => handleSort()}>Sort by {orderAsd ? "asd" : "desc"}</button>
+        <ol>{orderAsd ? moves : moves.reverse()}</ol>
       </div>
     </div>
   );
