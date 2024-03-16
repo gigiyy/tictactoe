@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function Square({ value, onSquareClick, highlight }) {
 
-  return <button className={highlight ? "square highlight": "square"}
+  return <button className={highlight ? "square highlight" : "square"}
     onClick={onSquareClick}>
     {value}
   </button>;
@@ -79,7 +79,7 @@ export default function Game() {
         description = "You are at move #" + move;
         return (
           <li key={move}>
-            <text>{description}</text>
+            <div>{description}</div>
           </li>
         );
       }
