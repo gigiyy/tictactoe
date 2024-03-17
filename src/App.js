@@ -72,6 +72,11 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
+  function restart() {
+    setCurrentMove(0);
+    setHistory([[Array(9).fill(null), null]]);
+  }
+
   const moves = history.map(([squares, at], move) => {
     let description;
     if (move > 0) {
@@ -103,7 +108,10 @@ export default function Game() {
         <Board currentMove={currentMove} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <button onClick={() => handleSort()}>Sort by {orderAsd ? "asd" : "desc"}</button>
+        <div className="control">
+          <button onClick={() => handleSort()}>Sort by {orderAsd ? "asd" : "desc"}</button>
+          <button onClick={() => restart()}>Restart</button>
+        </div>
         <ol>{orderAsd ? moves : moves.reverse()}</ol>
       </div>
     </div>
